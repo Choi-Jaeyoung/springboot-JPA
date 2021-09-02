@@ -2,3 +2,12 @@ spring:
     profiles:
         active: develop
         # active: product
+
+
+logging: 
+    config: classpath:config/logback-spring.xml
+    charset:
+        console: UTF-8
+        file: UTF-8
+    file: 
+        path: ./jar-logs

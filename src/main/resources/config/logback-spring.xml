@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds">
+
+	<springProperty scope="context" name="LOGS_PATH" source="logging.file.path" />
+
+	<!-- APPENDER -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}][%-5level][%thread   ${PID:-}]%n[%F > %M][%L] : %msg%n%n</pattern>
+		</encoder>
+	</appender>
+	<appender name="DEBUGGING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>DEBUG</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<file>${LOG_PATH}/debugging.log</file>
+		<encoder>
+			<pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}][%-5level][%thread   ${PID:-}]%n[%F > %M][%L] : %msg%n%n</pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_PATH}/before/debugging.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+			<totalSizeCap>1GB</totalSizeCap>
+		</rollingPolicy>
+	</appender>
+	<appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+		<file>${LOG_PATH}/rolling.log</file>
+		<encoder>
+			<pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}][%-5level][%thread   ${PID:-}]%n[%F > %M][%L] : %msg%n%n</pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_PATH}/before/rolling.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+			<totalSizeCap>1GB</totalSizeCap>
+		</rollingPolicy>
+	</appender>
+	<appender name="ROLLING_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>WARN</level>
+		</filter>
+		<file>${LOG_PATH}/rolling-error.log</file>
+		<encoder>
+			<pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}][%-5level][%thread   ${PID:-}]%n[%F > %M][%L] : %msg%n%n</pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_PATH}/before/rolling-error.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+			<totalSizeCap>1GB</totalSizeCap>
+		</rollingPolicy>
+	</appender>
+	<!-- // APPENDER -->
+
+	<!-- LOGGER -->
+
+	<!-- // LOGGER -->
+
+	<springProfile name="develop">
+		<root level="DEBUG">
+			<appender-ref ref="STDOUT"/>
+		</root>
+	</springProfile>
+
+	<springProfile name="product">
+		<root level="DEBUG">
+			<appender-ref ref="STDOUT"/>
+			<appender-ref ref="DEBUGGING"/>
+			<appender-ref ref="ROLLING"/>
+			<appender-ref ref="ROLLING_ERROR"/>
+		</root>
+	</springProfile>
+
+</configuration>
