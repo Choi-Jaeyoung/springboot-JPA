@@ -23,7 +23,7 @@
 `springboot-JPA/src/main/java/com/springboot/jpa/exception/SecurityExceptionHandler.java`
 
 - 샘플 Data   
-`springboot-JPA/src/main/resources/data.sql`
+`springboot-JPA/src/main/resources/data.sql`   
 `springboot-JPA/src/main/resources/schema.sql`
 
 ## 구동 순서
