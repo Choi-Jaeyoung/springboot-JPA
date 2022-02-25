@@ -8,15 +8,20 @@
 
 - h2 (DB)
 `springboot-JPA/src/main/resources/application-develop.yml`
+
 - JPA
 `springboot-JPA/src/main/resources/application-develop.yml`
+
 - Swagger (OAS)
 `springboot-JPA/src/main/resources/application-develop.yml`
+
 - Spring 시큐리티 설정
 `springboot-JPA/src/main/java/com/springboot/jpa/config/security/SecurityConfig.java`
+
 - Exception 핸들러 ( 시큐리티/컨트롤러 구분 )
 `springboot-JPA/src/main/java/com/springboot/jpa/exception/ControllerExceptionHandler.java`
 `springboot-JPA/src/main/java/com/springboot/jpa/exception/SecurityExceptionHandler.java`
+
 - 샘플 Data
 `springboot-JPA/src/main/resources/data.sql`
 `springboot-JPA/src/main/resources/schema.sql`
